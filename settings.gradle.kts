@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "owo-colors-kotlin"
+
