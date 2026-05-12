@@ -340,20 +340,28 @@ val codeqlCompileJvm = tasks.register<JavaExec>("codeqlCompileJvm") {
 
     val outDir = layout.buildDirectory.dir("classes/kotlin/codeql-jvm")
     val sources = fileTree("src/commonMain/kotlin") { include("**/*.kt") }
+    val emptySourceSentinel = layout.buildDirectory.file(
+        "generated/codeql-empty-source-sentinel/io/github/kotlinmania/owocolors/CodeqlEmptySourceSentinel.kt",
+    )
+    val emptySourceSentinelText =
+        """
+        package io.github.kotlinmania.owocolors
+
+        internal object CodeqlEmptySourceSentinel
+        """.trimIndent()
     inputs.files(sources).withPathSensitivity(PathSensitivity.RELATIVE)
     inputs.files(codeqlSourceClasspath).withNormalizer(ClasspathNormalizer::class.java)
+    inputs.property("codeqlEmptySourceSentinel", emptySourceSentinelText)
     outputs.dir(outDir)
-
-    // Skip when commonMain has no Kotlin source. kotlinc 2.3.21 with an
-    // empty source-file list drops into REPL mode and fails with
-    // "Kotlin REPL is deprecated and should be enabled explicitly". For
-    // a port that hasn't started yet (.gitkeep only under commonMain),
-    // a skipped CodeQL extraction is the correct outcome — there is
-    // genuinely no Kotlin to analyse.
-    onlyIf("commonMain has at least one Kotlin source") { sources.files.isNotEmpty() }
 
     doFirst {
         outDir.get().asFile.mkdirs()
+        val sourceFiles = sources.files.sortedBy { it.absolutePath }.ifEmpty {
+            val sentinel = emptySourceSentinel.get().asFile
+            sentinel.parentFile.mkdirs()
+            sentinel.writeText("$emptySourceSentinelText\n")
+            listOf(sentinel)
+        }
         args = listOf(
             "-d", outDir.get().asFile.absolutePath,
             "-classpath", codeqlSourceClasspath.asPath,
@@ -365,7 +373,7 @@ val codeqlCompileJvm = tasks.register<JavaExec>("codeqlCompileJvm") {
             "-opt-in", "kotlin.time.ExperimentalTime",
             "-opt-in", "kotlin.concurrent.atomics.ExperimentalAtomicApi",
             "-Xexpect-actual-classes",
-        ) + sources.files.map { it.absolutePath }
+        ) + sourceFiles.map { it.absolutePath }
     }
 }
 
