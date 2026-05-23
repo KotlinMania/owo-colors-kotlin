@@ -57,10 +57,18 @@ kotlin {
         binaries.framework { baseName = "OwoColors"; xcf.add(this) }
     }
     iosSimulatorArm64 {
-        binaries.framework { baseName = "OwoColors"; xcf.add(this) }
+        binaries.framework {
+            baseName = "OwoColors"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     iosX64 {
-        binaries.framework { baseName = "OwoColors"; xcf.add(this) }
+        binaries.framework {
+            baseName = "OwoColors"
+            isStatic = true
+            xcf.add(this)
+        }
     }
 
     tvosArm64 {
