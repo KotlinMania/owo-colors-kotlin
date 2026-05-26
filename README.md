@@ -131,7 +131,7 @@ This library has a conservative MSRV policy — Rust versions from the last 12 m
 
 ```kotlin
 dependencies {
-    implementation("io.github.kotlinmania:owo-colors-kotlin:0.1.0")
+    implementation("io.github.kotlinmania:owo-colors-kotlin:0.1.1")
 }
 ```
 
