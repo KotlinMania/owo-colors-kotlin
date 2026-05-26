@@ -22,7 +22,7 @@ plugins {
 }
 
 group = "io.github.kotlinmania"
-version = "0.1.0"
+version = "0.1.1"
 
 // The Android Gradle plugin resolves the SDK location while Gradle builds the
 // task graph — before any task executes — so a project-local Android SDK must
@@ -144,6 +144,30 @@ kotlin {
             }
         }
 
+        // ANSI renderer intermediate.
+        //
+        // commonMain holds the pure data layer (AnsiColors / DynColors /
+        // StyleFlags). The ANSI-escape renderer (Style, style(), Styled)
+        // lives in ansiMain so that future non-ANSI renderers — e.g. a
+        // browser-DOM or 24-bit-truecolor branch — can fork off without
+        // touching the data layer.
+        //
+        // Every declared target depends on ansiMain today: ANSI escape
+        // strings are inert text and produce no platform-specific I/O.
+        // The intermediate exists for the structure, not for divergent
+        // code.
+        val ansiMain by creating { dependsOn(getByName("commonMain")) }
+
+        listOf(
+            "macosArm64Main", "iosArm64Main", "iosSimulatorArm64Main", "iosX64Main",
+            "tvosArm64Main", "tvosSimulatorArm64Main",
+            "watchosArm64Main", "watchosDeviceArm64Main", "watchosSimulatorArm64Main",
+            "linuxX64Main", "linuxArm64Main", "mingwX64Main",
+            "androidNativeArm32Main", "androidNativeArm64Main",
+            "androidNativeX86Main", "androidNativeX64Main",
+            "jvmMain", "androidMain",
+            "jsMain", "wasmJsMain", "wasmWasiMain",
+        ).forEach { getByName(it).dependsOn(ansiMain) }
     }
     jvmToolchain(21)
 }
