@@ -32,4 +32,58 @@ final class OwoColorsExportTests: XCTestCase {
     func testSwiftModuleLoads() throws {
         XCTAssertTrue(true, "OwoColors swift module imported cleanly")
     }
+
+    func testStyleFactoryFromSwift() throws {
+        // Top-level `style()` factory crosses the bridge.
+        let s = style()
+        XCTAssertTrue(s.isPlain(), "default style should be plain")
+    }
+
+    func testStyleBuilderChainFromSwift() throws {
+        // The builder-chain methods (red, onBlue, bold, ...) are bridged
+        // because they return non-generic `Style`.
+        let s = Style().red().onBlue().bold()
+        XCTAssertFalse(s.isPlain(), "colored+bold style is not plain")
+    }
+
+    func testPrefixFormatterEmitsSgrCodes() throws {
+        // `prefixFormatter()` returns the non-generic `StylePrefixFormatter`
+        // whose `toString()` emits the SGR bracket sequence.
+        let prefix = Style().brightWhite().onBlue().bold().italic()
+            .prefixFormatter()
+            .toString()
+        XCTAssertEqual(prefix, "\u{001B}[97;44;1;3m")
+    }
+
+    func testSuffixFormatterIsCanonicalReset() throws {
+        let suffix = Style().red().suffixFormatter().toString()
+        XCTAssertEqual(suffix, "\u{001B}[0m")
+    }
+
+    func testPlainStyleEmitsNoEscapes() throws {
+        XCTAssertEqual(Style().prefixFormatter().toString(), "")
+        XCTAssertEqual(Style().suffixFormatter().toString(), "")
+    }
+
+    func testAnsiColorsEnumIsBridged() throws {
+        // The AnsiColors enum is exposed as a Swift enum with case-iterable
+        // support (visible in the generated OwoColors.swift). Confirm we can
+        // construct a Style with a dynamic color reference.
+        let viaColor = Style().color(color: AnsiColors.BrightYellow)
+            .prefixFormatter()
+            .toString()
+        XCTAssertEqual(viaColor, "\u{001B}[93m")
+
+        let viaOnColor = Style().onColor(color: AnsiColors.BrightYellow)
+            .prefixFormatter()
+            .toString()
+        XCTAssertEqual(viaOnColor, "\u{001B}[103m")
+    }
+
+    func testEffectsVarargFromSwift() throws {
+        let prefix = Style().effects(effects: .Strikethrough, .Underline)
+            .prefixFormatter()
+            .toString()
+        XCTAssertEqual(prefix, "\u{001B}[4;9m")
+    }
 }
