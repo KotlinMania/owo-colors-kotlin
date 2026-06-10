@@ -1,5 +1,9 @@
 // port-lint: source src/dyn_styles.rs
+@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
+
 package io.github.kotlinmania.owocolors
+
+import kotlin.native.HiddenFromObjC
 
 /**
  * A runtime-configurable text effect for use with [Style].
@@ -19,6 +23,7 @@ public enum class Effect {
 /**
  * A wrapper type which applies a [Style] when displaying the inner type.
  */
+@HiddenFromObjC
 public class Styled<T> internal constructor(
     /** The target value to be styled. */
     internal val target: T,
@@ -63,6 +68,7 @@ public data class Style(
      * println(styledText)
      * ```
      */
+    @HiddenFromObjC
     public fun <T> style(target: T): Styled<T> = Styled(target, this)
 
     /**
