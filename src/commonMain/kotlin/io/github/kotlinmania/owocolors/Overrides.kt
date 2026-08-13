@@ -78,7 +78,9 @@ public fun unsetOverride() {
 
 internal val OVERRIDE: Override = Override.none()
 
-internal class Override(initial: Int) {
+internal class Override(
+    initial: Int,
+) {
     private val bits: AtomicInt = AtomicInt(initial)
 
     internal fun inner(): Int = bits.load()

@@ -6,7 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class OverridesTest {
-
     @Test
     fun with_override_on_panic() {
         setOverride(false)

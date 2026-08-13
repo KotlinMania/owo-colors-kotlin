@@ -8,3 +8,4 @@ package io.github.kotlinmania.owocolors
 // require the full Style fmt_prefix/fmt_suffix transition logic plus the
 // IntoIterator impls that Kotlin would express as a custom collection
 // wrapper).
+internal object StyledListTest

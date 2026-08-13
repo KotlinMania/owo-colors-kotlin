@@ -1,9 +1,5 @@
 // port-lint: source src/dyn_styles.rs
-@file:OptIn(kotlin.experimental.ExperimentalObjCRefinement::class)
-
 package io.github.kotlinmania.owocolors
-
-import kotlin.native.HiddenFromObjC
 
 /**
  * A runtime-configurable text effect for use with [Style].
@@ -23,18 +19,18 @@ public enum class Effect {
 /**
  * A wrapper type which applies a [Style] when displaying the inner type.
  */
-@HiddenFromObjC
 public class Styled<T> internal constructor(
     /** The target value to be styled. */
     internal val target: T,
     /** The style to apply to target. */
     public val style: Style,
 ) {
-    override fun toString(): String = buildString {
-        style.fmtPrefix(this)
-        append(target)
-        style.fmtSuffix(this)
-    }
+    override fun toString(): String =
+        buildString {
+            style.fmtPrefix(this)
+            append(target)
+            style.fmtSuffix(this)
+        }
 }
 
 /**
@@ -56,7 +52,6 @@ public data class Style(
     internal val bold: Boolean = false,
     internal val styleFlags: StyleFlags = StyleFlags(),
 ) {
-
     /**
      * Apply the style to a given struct to output.
      *
@@ -68,7 +63,6 @@ public data class Style(
      * println(styledText)
      * ```
      */
-    @HiddenFromObjC
     public fun <T> style(target: T): Styled<T> = Styled(target, this)
 
     /**
@@ -91,70 +85,159 @@ public data class Style(
      */
     public fun removeBg(): Style = copy(bg = null)
 
-    /** Change the foreground color to black. */ public fun black(): Style = copy(fg = DynColors.Ansi(AnsiColors.Black))
-    /** Change the background color to black. */ public fun onBlack(): Style = copy(bg = DynColors.Ansi(AnsiColors.Black))
-    /** Change the foreground color to red. */ public fun red(): Style = copy(fg = DynColors.Ansi(AnsiColors.Red))
-    /** Change the background color to red. */ public fun onRed(): Style = copy(bg = DynColors.Ansi(AnsiColors.Red))
-    /** Change the foreground color to green. */ public fun green(): Style = copy(fg = DynColors.Ansi(AnsiColors.Green))
-    /** Change the background color to green. */ public fun onGreen(): Style = copy(bg = DynColors.Ansi(AnsiColors.Green))
-    /** Change the foreground color to yellow. */ public fun yellow(): Style = copy(fg = DynColors.Ansi(AnsiColors.Yellow))
-    /** Change the background color to yellow. */ public fun onYellow(): Style = copy(bg = DynColors.Ansi(AnsiColors.Yellow))
-    /** Change the foreground color to blue. */ public fun blue(): Style = copy(fg = DynColors.Ansi(AnsiColors.Blue))
-    /** Change the background color to blue. */ public fun onBlue(): Style = copy(bg = DynColors.Ansi(AnsiColors.Blue))
-    /** Change the foreground color to magenta. */ public fun magenta(): Style = copy(fg = DynColors.Ansi(AnsiColors.Magenta))
-    /** Change the background color to magenta. */ public fun onMagenta(): Style = copy(bg = DynColors.Ansi(AnsiColors.Magenta))
-    /** Change the foreground color to purple. */ public fun purple(): Style = copy(fg = DynColors.Ansi(AnsiColors.Magenta))
-    /** Change the background color to purple. */ public fun onPurple(): Style = copy(bg = DynColors.Ansi(AnsiColors.Magenta))
-    /** Change the foreground color to cyan. */ public fun cyan(): Style = copy(fg = DynColors.Ansi(AnsiColors.Cyan))
-    /** Change the background color to cyan. */ public fun onCyan(): Style = copy(bg = DynColors.Ansi(AnsiColors.Cyan))
-    /** Change the foreground color to white. */ public fun white(): Style = copy(fg = DynColors.Ansi(AnsiColors.White))
-    /** Change the background color to white. */ public fun onWhite(): Style = copy(bg = DynColors.Ansi(AnsiColors.White))
+    /** Change the foreground color to black. */
+    public fun black(): Style = copy(fg = DynColors.Ansi(AnsiColors.Black))
+
+    /** Change the background color to black. */
+    public fun onBlack(): Style = copy(bg = DynColors.Ansi(AnsiColors.Black))
+
+    /** Change the foreground color to red. */
+    public fun red(): Style = copy(fg = DynColors.Ansi(AnsiColors.Red))
+
+    /** Change the background color to red. */
+    public fun onRed(): Style = copy(bg = DynColors.Ansi(AnsiColors.Red))
+
+    /** Change the foreground color to green. */
+    public fun green(): Style = copy(fg = DynColors.Ansi(AnsiColors.Green))
+
+    /** Change the background color to green. */
+    public fun onGreen(): Style = copy(bg = DynColors.Ansi(AnsiColors.Green))
+
+    /** Change the foreground color to yellow. */
+    public fun yellow(): Style = copy(fg = DynColors.Ansi(AnsiColors.Yellow))
+
+    /** Change the background color to yellow. */
+    public fun onYellow(): Style = copy(bg = DynColors.Ansi(AnsiColors.Yellow))
+
+    /** Change the foreground color to blue. */
+    public fun blue(): Style = copy(fg = DynColors.Ansi(AnsiColors.Blue))
+
+    /** Change the background color to blue. */
+    public fun onBlue(): Style = copy(bg = DynColors.Ansi(AnsiColors.Blue))
+
+    /** Change the foreground color to magenta. */
+    public fun magenta(): Style = copy(fg = DynColors.Ansi(AnsiColors.Magenta))
+
+    /** Change the background color to magenta. */
+    public fun onMagenta(): Style = copy(bg = DynColors.Ansi(AnsiColors.Magenta))
+
+    /** Change the foreground color to purple. */
+    public fun purple(): Style = copy(fg = DynColors.Ansi(AnsiColors.Magenta))
+
+    /** Change the background color to purple. */
+    public fun onPurple(): Style = copy(bg = DynColors.Ansi(AnsiColors.Magenta))
+
+    /** Change the foreground color to cyan. */
+    public fun cyan(): Style = copy(fg = DynColors.Ansi(AnsiColors.Cyan))
+
+    /** Change the background color to cyan. */
+    public fun onCyan(): Style = copy(bg = DynColors.Ansi(AnsiColors.Cyan))
+
+    /** Change the foreground color to white. */
+    public fun white(): Style = copy(fg = DynColors.Ansi(AnsiColors.White))
+
+    /** Change the background color to white. */
+    public fun onWhite(): Style = copy(bg = DynColors.Ansi(AnsiColors.White))
 
     /** Change the foreground color to the terminal default. */
     public fun defaultColor(): Style = copy(fg = DynColors.Ansi(AnsiColors.Default))
+
     /** Change the background color to the terminal default. */
     public fun onDefaultColor(): Style = copy(bg = DynColors.Ansi(AnsiColors.Default))
 
-    /** Change the foreground color to bright black. */ public fun brightBlack(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightBlack))
-    /** Change the background color to bright black. */ public fun onBrightBlack(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightBlack))
-    /** Change the foreground color to bright red. */ public fun brightRed(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightRed))
-    /** Change the background color to bright red. */ public fun onBrightRed(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightRed))
-    /** Change the foreground color to bright green. */ public fun brightGreen(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightGreen))
-    /** Change the background color to bright green. */ public fun onBrightGreen(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightGreen))
-    /** Change the foreground color to bright yellow. */ public fun brightYellow(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightYellow))
-    /** Change the background color to bright yellow. */ public fun onBrightYellow(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightYellow))
-    /** Change the foreground color to bright blue. */ public fun brightBlue(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightBlue))
-    /** Change the background color to bright blue. */ public fun onBrightBlue(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightBlue))
-    /** Change the foreground color to bright magenta. */ public fun brightMagenta(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightMagenta))
-    /** Change the background color to bright magenta. */ public fun onBrightMagenta(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightMagenta))
-    /** Change the foreground color to bright purple. */ public fun brightPurple(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightMagenta))
-    /** Change the background color to bright purple. */ public fun onBrightPurple(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightMagenta))
-    /** Change the foreground color to bright cyan. */ public fun brightCyan(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightCyan))
-    /** Change the background color to bright cyan. */ public fun onBrightCyan(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightCyan))
-    /** Change the foreground color to bright white. */ public fun brightWhite(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightWhite))
-    /** Change the background color to bright white. */ public fun onBrightWhite(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightWhite))
+    /** Change the foreground color to bright black. */
+    public fun brightBlack(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightBlack))
 
-    /** Make the text bold. */ public fun bold(): Style = copy(bold = true)
-    /** Make the text dim. */ public fun dimmed(): Style = copy(styleFlags = styleFlags.setDimmed(true))
-    /** Make the text italicized. */ public fun italic(): Style = copy(styleFlags = styleFlags.setItalic(true))
-    /** Make the text underlined. */ public fun underline(): Style = copy(styleFlags = styleFlags.setUnderline(true))
-    /** Make the text blink. */ public fun blink(): Style = copy(styleFlags = styleFlags.setBlink(true))
-    /** Make the text blink (but fast!). */ public fun blinkFast(): Style = copy(styleFlags = styleFlags.setBlinkFast(true))
-    /** Swap the foreground and background colors. */ public fun reversed(): Style = copy(styleFlags = styleFlags.setReversed(true))
-    /** Hide the text. */ public fun hidden(): Style = copy(styleFlags = styleFlags.setHidden(true))
-    /** Cross out the text. */ public fun strikethrough(): Style = copy(styleFlags = styleFlags.setStrikethrough(true))
+    /** Change the background color to bright black. */
+    public fun onBrightBlack(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightBlack))
 
-    private fun setEffect(effect: Effect, to: Boolean): Style = when (effect) {
-        Effect.Bold -> copy(bold = to)
-        Effect.Dimmed -> copy(styleFlags = styleFlags.setDimmed(to))
-        Effect.Italic -> copy(styleFlags = styleFlags.setItalic(to))
-        Effect.Underline -> copy(styleFlags = styleFlags.setUnderline(to))
-        Effect.Blink -> copy(styleFlags = styleFlags.setBlink(to))
-        Effect.BlinkFast -> copy(styleFlags = styleFlags.setBlinkFast(to))
-        Effect.Reversed -> copy(styleFlags = styleFlags.setReversed(to))
-        Effect.Hidden -> copy(styleFlags = styleFlags.setHidden(to))
-        Effect.Strikethrough -> copy(styleFlags = styleFlags.setStrikethrough(to))
-    }
+    /** Change the foreground color to bright red. */
+    public fun brightRed(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightRed))
+
+    /** Change the background color to bright red. */
+    public fun onBrightRed(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightRed))
+
+    /** Change the foreground color to bright green. */
+    public fun brightGreen(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightGreen))
+
+    /** Change the background color to bright green. */
+    public fun onBrightGreen(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightGreen))
+
+    /** Change the foreground color to bright yellow. */
+    public fun brightYellow(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightYellow))
+
+    /** Change the background color to bright yellow. */
+    public fun onBrightYellow(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightYellow))
+
+    /** Change the foreground color to bright blue. */
+    public fun brightBlue(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightBlue))
+
+    /** Change the background color to bright blue. */
+    public fun onBrightBlue(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightBlue))
+
+    /** Change the foreground color to bright magenta. */
+    public fun brightMagenta(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightMagenta))
+
+    /** Change the background color to bright magenta. */
+    public fun onBrightMagenta(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightMagenta))
+
+    /** Change the foreground color to bright purple. */
+    public fun brightPurple(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightMagenta))
+
+    /** Change the background color to bright purple. */
+    public fun onBrightPurple(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightMagenta))
+
+    /** Change the foreground color to bright cyan. */
+    public fun brightCyan(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightCyan))
+
+    /** Change the background color to bright cyan. */
+    public fun onBrightCyan(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightCyan))
+
+    /** Change the foreground color to bright white. */
+    public fun brightWhite(): Style = copy(fg = DynColors.Ansi(AnsiColors.BrightWhite))
+
+    /** Change the background color to bright white. */
+    public fun onBrightWhite(): Style = copy(bg = DynColors.Ansi(AnsiColors.BrightWhite))
+
+    /** Make the text bold. */
+    public fun bold(): Style = copy(bold = true)
+
+    /** Make the text dim. */
+    public fun dimmed(): Style = copy(styleFlags = styleFlags.setDimmed(true))
+
+    /** Make the text italicized. */
+    public fun italic(): Style = copy(styleFlags = styleFlags.setItalic(true))
+
+    /** Make the text underlined. */
+    public fun underline(): Style = copy(styleFlags = styleFlags.setUnderline(true))
+
+    /** Make the text blink. */
+    public fun blink(): Style = copy(styleFlags = styleFlags.setBlink(true))
+
+    /** Make the text blink (but fast!). */
+    public fun blinkFast(): Style = copy(styleFlags = styleFlags.setBlinkFast(true))
+
+    /** Swap the foreground and background colors. */
+    public fun reversed(): Style = copy(styleFlags = styleFlags.setReversed(true))
+
+    /** Hide the text. */
+    public fun hidden(): Style = copy(styleFlags = styleFlags.setHidden(true))
+
+    /** Cross out the text. */
+    public fun strikethrough(): Style = copy(styleFlags = styleFlags.setStrikethrough(true))
+
+    private fun setEffect(effect: Effect, to: Boolean): Style =
+        when (effect) {
+            Effect.Bold -> copy(bold = to)
+            Effect.Dimmed -> copy(styleFlags = styleFlags.setDimmed(to))
+            Effect.Italic -> copy(styleFlags = styleFlags.setItalic(to))
+            Effect.Underline -> copy(styleFlags = styleFlags.setUnderline(to))
+            Effect.Blink -> copy(styleFlags = styleFlags.setBlink(to))
+            Effect.BlinkFast -> copy(styleFlags = styleFlags.setBlinkFast(to))
+            Effect.Reversed -> copy(styleFlags = styleFlags.setReversed(to))
+            Effect.Hidden -> copy(styleFlags = styleFlags.setHidden(to))
+            Effect.Strikethrough -> copy(styleFlags = styleFlags.setStrikethrough(to))
+        }
 
     private fun setEffects(effects: Array<out Effect>, to: Boolean): Style {
         var result = this
@@ -251,14 +334,46 @@ public data class Style(
             }
 
             if (formatLessImportantEffects) {
-                if (styleFlags.dimmed()) { if (semicolon) out.append(';'); out.append('2'); semicolon = true }
-                if (styleFlags.italic()) { if (semicolon) out.append(';'); out.append('3'); semicolon = true }
-                if (styleFlags.underline()) { if (semicolon) out.append(';'); out.append('4'); semicolon = true }
-                if (styleFlags.blink()) { if (semicolon) out.append(';'); out.append('5'); semicolon = true }
-                if (styleFlags.blinkFast()) { if (semicolon) out.append(';'); out.append('6'); semicolon = true }
-                if (styleFlags.reversed()) { if (semicolon) out.append(';'); out.append('7'); semicolon = true }
-                if (styleFlags.hidden()) { if (semicolon) out.append(';'); out.append('8'); semicolon = true }
-                if (styleFlags.strikethrough()) { if (semicolon) out.append(';'); out.append('9'); semicolon = true }
+                if (styleFlags.dimmed()) {
+                    if (semicolon) out.append(';')
+                    out.append('2')
+                    semicolon = true
+                }
+                if (styleFlags.italic()) {
+                    if (semicolon) out.append(';')
+                    out.append('3')
+                    semicolon = true
+                }
+                if (styleFlags.underline()) {
+                    if (semicolon) out.append(';')
+                    out.append('4')
+                    semicolon = true
+                }
+                if (styleFlags.blink()) {
+                    if (semicolon) out.append(';')
+                    out.append('5')
+                    semicolon = true
+                }
+                if (styleFlags.blinkFast()) {
+                    if (semicolon) out.append(';')
+                    out.append('6')
+                    semicolon = true
+                }
+                if (styleFlags.reversed()) {
+                    if (semicolon) out.append(';')
+                    out.append('7')
+                    semicolon = true
+                }
+                if (styleFlags.hidden()) {
+                    if (semicolon) out.append(';')
+                    out.append('8')
+                    semicolon = true
+                }
+                if (styleFlags.strikethrough()) {
+                    if (semicolon) out.append(';')
+                    out.append('9')
+                    semicolon = true
+                }
             }
         }
 
@@ -294,7 +409,9 @@ private fun DynColors.writeRawAnsiBg(out: StringBuilder) {
  * suffix, which is useful for formatting the prefix separately.
  */
 @ConsistentCopyVisibility
-public data class StylePrefixFormatter internal constructor(internal val style: Style) {
+public data class StylePrefixFormatter internal constructor(
+    internal val style: Style,
+) {
     override fun toString(): String = buildString { style.fmtPrefix(this) }
 }
 
@@ -305,7 +422,9 @@ public data class StylePrefixFormatter internal constructor(internal val style: 
  * prefix, which is useful for formatting the suffix separately.
  */
 @ConsistentCopyVisibility
-public data class StyleSuffixFormatter internal constructor(internal val style: Style) {
+public data class StyleSuffixFormatter internal constructor(
+    internal val style: Style,
+) {
     override fun toString(): String = buildString { style.fmtSuffix(this) }
 }
 
@@ -315,24 +434,39 @@ public fun style(): Style = Style()
 /**
  * Bit-packed effect flags storing the eight non-bold text effects.
  */
-public data class StyleFlags(internal val bits: Int = 0) {
-
+public data class StyleFlags(
+    internal val bits: Int = 0,
+) {
     public fun dimmed(): Boolean = (bits ushr DIMMED_SHIFT) and 1 != 0
+
     public fun italic(): Boolean = (bits ushr ITALIC_SHIFT) and 1 != 0
+
     public fun underline(): Boolean = (bits ushr UNDERLINE_SHIFT) and 1 != 0
+
     public fun blink(): Boolean = (bits ushr BLINK_SHIFT) and 1 != 0
+
     public fun blinkFast(): Boolean = (bits ushr BLINK_FAST_SHIFT) and 1 != 0
+
     public fun reversed(): Boolean = (bits ushr REVERSED_SHIFT) and 1 != 0
+
     public fun hidden(): Boolean = (bits ushr HIDDEN_SHIFT) and 1 != 0
+
     public fun strikethrough(): Boolean = (bits ushr STRIKETHROUGH_SHIFT) and 1 != 0
 
     public fun setDimmed(value: Boolean): StyleFlags = StyleFlags(set(DIMMED_SHIFT, value))
+
     public fun setItalic(value: Boolean): StyleFlags = StyleFlags(set(ITALIC_SHIFT, value))
+
     public fun setUnderline(value: Boolean): StyleFlags = StyleFlags(set(UNDERLINE_SHIFT, value))
+
     public fun setBlink(value: Boolean): StyleFlags = StyleFlags(set(BLINK_SHIFT, value))
+
     public fun setBlinkFast(value: Boolean): StyleFlags = StyleFlags(set(BLINK_FAST_SHIFT, value))
+
     public fun setReversed(value: Boolean): StyleFlags = StyleFlags(set(REVERSED_SHIFT, value))
+
     public fun setHidden(value: Boolean): StyleFlags = StyleFlags(set(HIDDEN_SHIFT, value))
+
     public fun setStrikethrough(value: Boolean): StyleFlags = StyleFlags(set(STRIKETHROUGH_SHIFT, value))
 
     public fun isPlain(): Boolean = bits == 0

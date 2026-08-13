@@ -8,3 +8,4 @@ package io.github.kotlinmania.owocolors
 // extension method to translate the call sites. The equivalent behavior on
 // the Style builder is already covered by `dyn_styles.rs::test_color` and
 // `dyn_styles.rs::test_it`.
+internal object ComboTest
