@@ -5,7 +5,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class DynStylesTest {
-
     // Upstream `size_of` asserts `std::mem::size_of::<Style>() == 10`.
     // Not ported: Kotlin's Style is a heap-allocated data class with no
     // 10-byte layout guarantee — the upstream assertion is checking the
@@ -14,18 +13,19 @@ class DynStylesTest {
 
     @Test
     fun test_it() {
-        val style = Style()
-            .brightWhite()
-            .onBlue()
-            .bold()
-            .dimmed()
-            .italic()
-            .underline()
-            .blink()
-            // .blinkFast()
-            // .reversed()
-            // .hidden()
-            .strikethrough()
+        val style =
+            Style()
+                .brightWhite()
+                .onBlue()
+                .bold()
+                .dimmed()
+                .italic()
+                .underline()
+                .blink()
+                // .blinkFast()
+                // .reversed()
+                // .hidden()
+                .strikethrough()
         val s = style.style("TEST")
         val s2 = s.toString()
         assertEquals("\u001B[97;44;1;2;3;4;5;9mTEST\u001B[0m", s2)
@@ -48,9 +48,10 @@ class DynStylesTest {
 
     @Test
     fun test_color() {
-        val style = Style()
-            .color(AnsiColors.White)
-            .onColor(AnsiColors.Black)
+        val style =
+            Style()
+                .color(AnsiColors.White)
+                .onColor(AnsiColors.Black)
 
         val s = style.style("TEST")
         val s2 = s.toString()

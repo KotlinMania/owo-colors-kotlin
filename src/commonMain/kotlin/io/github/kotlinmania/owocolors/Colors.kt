@@ -6,7 +6,10 @@ package io.github.kotlinmania.owocolors
  * Available standard ANSI colors for use with [Style.color] or
  * [Style.onColor].
  */
-public enum class AnsiColors(internal val fg: Int, internal val bg: Int) {
+public enum class AnsiColors(
+    internal val fg: Int,
+    internal val bg: Int,
+) {
     Black(30, 40),
     Red(31, 41),
     Green(32, 42),

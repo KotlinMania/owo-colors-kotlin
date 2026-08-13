@@ -5,7 +5,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class TestsTest {
-
     // Upstream `test_fg` and `test_bg` exercise the OwoColorize extension
     // form ("test".red() / "test".on_red()). Not ported: OwoColorize trait
     // is not yet ported, so there is no Kotlin extension to translate.
