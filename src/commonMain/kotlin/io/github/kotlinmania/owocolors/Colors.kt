@@ -1,4 +1,4 @@
-// port-lint: source src/colors.rs
+// port-lint: source colors.rs
 // Color types for used for being generic over the color
 package io.github.kotlinmania.owocolors
 
