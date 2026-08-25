@@ -1,18 +1,18 @@
-// port-lint: tests src/dyn_styles.rs
+// port-lint: tests dyn_styles.rs
 package io.github.kotlinmania.owocolors
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class DynStylesTest {
-    // Upstream `size_of` asserts `std::mem::size_of::<Style>() == 10`.
+    // Upstream size-of test asserts exact byte layout.
     // Not ported: Kotlin's Style is a heap-allocated data class with no
     // 10-byte layout guarantee — the upstream assertion is checking the
-    // bit-packed Rust representation, which has no equivalent on the JVM
+    // bit-packed representation, which has no equivalent on the JVM
     // or Kotlin/Native.
 
     @Test
-    fun test_it() {
+    fun testIt() {
         val style =
             Style()
                 .brightWhite()
@@ -38,7 +38,7 @@ class DynStylesTest {
     }
 
     @Test
-    fun test_effects() {
+    fun testEffects() {
         val style = Style().effects(Effect.Strikethrough, Effect.Underline)
 
         val s = style.style("TEST")
@@ -47,7 +47,7 @@ class DynStylesTest {
     }
 
     @Test
-    fun test_color() {
+    fun testColor() {
         val style =
             Style()
                 .color(AnsiColors.White)

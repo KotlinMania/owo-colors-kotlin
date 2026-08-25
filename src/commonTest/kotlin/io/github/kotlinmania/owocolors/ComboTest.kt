@@ -1,4 +1,4 @@
-// port-lint: tests src/combo.rs
+// port-lint: tests combo.rs
 package io.github.kotlinmania.owocolors
 
 // Upstream combo.rs tests exercise the OwoColorize extension form on string

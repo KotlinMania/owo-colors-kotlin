@@ -1,4 +1,4 @@
-// port-lint: tests src/overrides.rs
+// port-lint: tests overrides.rs
 package io.github.kotlinmania.owocolors
 
 import kotlin.test.Test
@@ -7,7 +7,7 @@ import kotlin.test.assertFailsWith
 
 class OverridesTest {
     @Test
-    fun with_override_on_panic() {
+    fun withOverrideOnPanic() {
         setOverride(false)
 
         assertFailsWith<IllegalStateException>("test should panic") {

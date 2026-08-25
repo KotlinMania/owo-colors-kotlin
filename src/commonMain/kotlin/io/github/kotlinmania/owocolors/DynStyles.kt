@@ -1,4 +1,4 @@
-// port-lint: source src/dyn_styles.rs
+// port-lint: source dyn_styles.rs
 package io.github.kotlinmania.owocolors
 
 /**
