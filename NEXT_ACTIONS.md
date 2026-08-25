@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 4/15 (26.7%)
-- **Function parity:** 31/133 matched (target 101) — 23.3%
-- **Class/type parity:** 8/35 matched (target 12) — 22.9%
-- **Combined symbol parity:** 39/168 matched (target 113) — 23.2%
+- **Files Present:** 4/14 (28.6%)
+- **Function parity:** 31/130 matched (target 101) — 23.8%
+- **Class/type parity:** 8/33 matched (target 12) — 24.2%
+- **Combined symbol parity:** 39/163 matched (target 113) — 23.9%
 - **Average inline-code cosine:** 0.54 (function body across 4 matched files)
 - **Average documentation cosine:** 0.62 (doc text across 4 matched files)
 - **Cheat-zeroed Files:** 1
@@ -27,9 +27,9 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. owo-colors.dyn_styles
+### 1. dyn_styles
 
-- **Target:** `owocolors.DynStyles [PROVENANCE-FALLBACK]`
+- **Target:** `owocolors.DynStyles`
 - **Similarity:** 0.40
 - **Dependents:** 0
 - **Priority Score:** 174406.0
@@ -38,15 +38,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 6/6 matched (target 7)
 - **Missing types:** _none_
 - **Tests:** 3/9 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `dyn_styles.rs` vs expected `dyn_styles.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:dyn_styles.rs` vs expected `dyn_styles.rs`
-- **Proposed provenance header:** `// port-lint: source dyn_styles.rs` (current: `// port-lint: source dyn_styles.rs`)
-- **Proposed provenance header:** `// port-lint: tests dyn_styles.rs` (current: `// port-lint: tests dyn_styles.rs`)
-- **Lint issues:** 2
 
-### 2. owo-colors.dyn_colors
+### 2. dyn_colors
 
-- **Target:** `owocolors.DynColors [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `owocolors.DynColors [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 91010.0
@@ -54,13 +49,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `fmt_ansi_fg`, `fmt_ansi_bg`, `fmt_raw_ansi_fg`, `fmt_raw_ansi_bg`, `get_dyncolors_fg`, `get_dyncolors_bg`, `from_str`
 - **Types:** 1/3 matched (target 2)
 - **Missing types:** `ParseColorError`, `Err`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `dyn_colors.rs` vs expected `dyn_colors.rs`
-- **Proposed provenance header:** `// port-lint: source dyn_colors.rs` (current: `// port-lint: source dyn_colors.rs`)
-- **Lint issues:** 1
 
-### 3. owo-colors.overrides
+### 3. overrides
 
-- **Target:** `owocolors.Overrides [PROVENANCE-FALLBACK]`
+- **Target:** `owocolors.Overrides`
 - **Similarity:** 0.76
 - **Dependents:** 0
 - **Priority Score:** 21302.4
@@ -69,15 +61,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched
 - **Missing types:** `ResetOverrideGuard`
 - **Tests:** 1/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `overrides.rs` vs expected `overrides.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:overrides.rs` vs expected `overrides.rs`
-- **Proposed provenance header:** `// port-lint: source overrides.rs` (current: `// port-lint: source overrides.rs`)
-- **Proposed provenance header:** `// port-lint: tests overrides.rs` (current: `// port-lint: tests overrides.rs`)
-- **Lint issues:** 2
 
-### 4. owo-colors.colors
+### 4. colors
 
-- **Target:** `owocolors.Colors [PROVENANCE-FALLBACK]`
+- **Target:** `owocolors.Colors`
 - **Similarity:** 1.00
 - **Dependents:** 0
 - **Priority Score:** 0.0
@@ -85,9 +72,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `colors.rs` vs expected `colors.rs`
-- **Proposed provenance header:** `// port-lint: source colors.rs` (current: `// port-lint: source colors.rs`)
-- **Lint issues:** 1
 
 ## Success Criteria
 
@@ -109,5 +93,5 @@ do not treat them as the next implementation target by default.
 
 | Source | Expected target | Deps | Source path | Expected path |
 |--------|-----------------|------|-------------|---------------|
-| `owo-colors.lib` | `owocolors.src.Lib` | 0 | `owo-colors/src/lib.rs` | `owocolors/src/Lib.kt` |
+| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
 
