@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 3/14 (21.4%)
-- **Function parity:** 10/136 matched (target 10) — 7.4%
-- **Class/type parity:** 2/33 matched (target 5) — 6.1%
-- **Combined symbol parity:** 12/169 matched (target 15) — 7.1%
-- **Average inline-code cosine:** 0.33 (function body across 3 matched files)
-- **Average documentation cosine:** 0.51 (doc text across 3 matched files)
-- **Cheat-zeroed Files:** 2
-- **Critical Issues:** 2 files with <0.60 function similarity
+- **Files Present:** 4/14 (28.6%)
+- **Function parity:** 31/130 matched (target 101) — 23.8%
+- **Class/type parity:** 8/33 matched (target 12) — 24.2%
+- **Combined symbol parity:** 39/163 matched (target 113) — 23.9%
+- **Average inline-code cosine:** 0.25 (function body across 4 matched files)
+- **Average documentation cosine:** 0.62 (doc text across 4 matched files)
+- **Cheat-zeroed Files:** 3
+- **Critical Issues:** 3 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -27,7 +27,24 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. dyn_colors
+### 1. dyn_styles
+
+- **Target:** `owocolors.DynStyles [ZERO] [PROVENANCE-FALLBACK]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 174410.0
+- **Functions:** 21/38 matched (target 91)
+- **Missing functions:** `new`, `default`, `fg`, `bg`, `fg_rgb`, `bg_rgb`, `truecolor`, `on_truecolor`, `fmt`, `inner`, `inner_mut`, `size_of`, `test_truecolor`, `test_string_reference`, `test_owocolorize`, `test_is_plain`, `test_inner`
+- **Types:** 6/6 matched (target 7)
+- **Missing types:** _none_
+- **Tests:** 3/9 matched
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `src/dyn_styles.rs` vs expected `dyn_styles.rs`
+- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:src/dyn_styles.rs` vs expected `dyn_styles.rs`
+- **Proposed provenance header:** `// port-lint: source dyn_styles.rs` (current: `// port-lint: source src/dyn_styles.rs`)
+- **Proposed provenance header:** `// port-lint: tests dyn_styles.rs` (current: `// port-lint: tests src/dyn_styles.rs`)
+- **Lint issues:** 2
+
+### 2. dyn_colors
 
 - **Target:** `owocolors.DynColors [ZERO] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
@@ -41,7 +58,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Proposed provenance header:** `// port-lint: source dyn_colors.rs` (current: `// port-lint: source src/dyn_colors.rs`)
 - **Lint issues:** 1
 
-### 2. overrides
+### 3. overrides
 
 - **Target:** `owocolors.Overrides [ZERO] [PROVENANCE-FALLBACK]`
 - **Similarity:** 0.00
@@ -58,7 +75,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Proposed provenance header:** `// port-lint: tests overrides.rs` (current: `// port-lint: tests src/overrides.rs`)
 - **Lint issues:** 2
 
-### 3. colors
+### 4. colors
 
 - **Target:** `owocolors.Colors [PROVENANCE-FALLBACK]`
 - **Similarity:** 1.00
