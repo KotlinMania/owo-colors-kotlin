@@ -3,6 +3,8 @@ package io.github.kotlinmania.owocolors
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class DynStylesTest {
     // Upstream size-of test asserts exact byte layout.
@@ -56,5 +58,64 @@ class DynStylesTest {
         val s = style.style("TEST")
         val s2 = s.toString()
         assertEquals("\u001B[37;40mTEST\u001B[0m", s2)
+    }
+
+    @Test
+    fun testTruecolor() {
+        val style = Style().truecolor(255, 255, 255).onTruecolor(0, 0, 0)
+
+        val s = style.style("TEST")
+        val s2 = s.toString()
+        assertEquals("\u001B[38;2;255;255;255;48;2;0;0;0mTEST\u001B[0m", s2)
+    }
+
+    @Test
+    fun testStringReference() {
+        val style = Style().truecolor(255, 255, 255).onTruecolor(0, 0, 0)
+
+        val string = "TEST"
+        val s = style.style(string)
+        val s2 = s.toString()
+        assertEquals("\u001B[38;2;255;255;255;48;2;0;0;0mTEST\u001B[0m", s2)
+    }
+
+    @Test
+    fun testOwocolorize() {
+        val style = Style().brightWhite().onBlue()
+
+        val s = "TEST".style(style)
+        val s2 = s.toString()
+        assertEquals("\u001B[97;44mTEST\u001B[0m", s2)
+    }
+
+    @Test
+    fun testIsPlain() {
+        val style = Style().brightWhite().onBlue()
+
+        assertFalse(style.isPlain())
+        assertTrue(Style().isPlain())
+
+        val string = "TEST"
+        val s = Style().style(string)
+        val s2 = s.toString()
+
+        assertEquals(string, s2)
+    }
+
+    @Test
+    fun testInner() {
+        val style = Style()
+        val s = "TEST".style(style)
+
+        assertEquals("TEST", s.inner())
+    }
+
+    @Test
+    fun testDynColorsParse() {
+        val red = DynColors.fromStr("red")
+        assertEquals(DynColors.Ansi(AnsiColors.Red), red)
+
+        val hex = DynColors.fromStr("#ff8000")
+        assertEquals(DynColors.Rgb(255, 128, 0), hex)
     }
 }
