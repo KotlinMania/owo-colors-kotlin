@@ -5,12 +5,12 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 4/14 (28.6%)
-- **Function parity:** 31/130 matched (target 101) — 23.8%
-- **Class/type parity:** 8/33 matched (target 12) — 24.2%
-- **Combined symbol parity:** 39/163 matched (target 113) — 23.9%
-- **Average inline-code cosine:** 0.54 (function body across 4 matched files)
-- **Average documentation cosine:** 0.62 (doc text across 4 matched files)
-- **Cheat-zeroed Files:** 1
+- **Function parity:** 48/130 matched (target 130) — 36.9%
+- **Class/type parity:** 9/33 matched (target 15) — 27.3%
+- **Combined symbol parity:** 57/163 matched (target 145) — 35.0%
+- **Average inline-code cosine:** 0.64 (function body across 4 matched files)
+- **Average documentation cosine:** 0.66 (doc text across 4 matched files)
+- **Cheat-zeroed Files:** 0
 - **Critical Issues:** 2 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -30,25 +30,25 @@ Every matched file is listed below with function and type symbol parity.
 ### 1. dyn_styles
 
 - **Target:** `owocolors.DynStyles`
-- **Similarity:** 0.40
+- **Similarity:** 0.57
 - **Dependents:** 0
-- **Priority Score:** 174406.0
-- **Functions:** 21/38 matched (target 91)
-- **Missing functions:** `new`, `default`, `fg`, `bg`, `fg_rgb`, `bg_rgb`, `truecolor`, `on_truecolor`, `fmt`, `inner`, `inner_mut`, `size_of`, `test_truecolor`, `test_string_reference`, `test_owocolorize`, `test_is_plain`, `test_inner`
+- **Priority Score:** 54404.3
+- **Functions:** 33/38 matched (target 107)
+- **Missing functions:** `new`, `default`, `fmt`, `inner_mut`, `size_of`
 - **Types:** 6/6 matched (target 7)
 - **Missing types:** _none_
-- **Tests:** 3/9 matched
+- **Tests:** 8/9 matched
 
 ### 2. dyn_colors
 
-- **Target:** `owocolors.DynColors [ZERO]`
-- **Similarity:** 0.00
+- **Target:** `owocolors.DynColors`
+- **Similarity:** 0.22
 - **Dependents:** 0
-- **Priority Score:** 91010.0
-- **Functions:** 0/7 matched (target 0)
-- **Missing functions:** `fmt_ansi_fg`, `fmt_ansi_bg`, `fmt_raw_ansi_fg`, `fmt_raw_ansi_bg`, `get_dyncolors_fg`, `get_dyncolors_bg`, `from_str`
-- **Types:** 1/3 matched (target 2)
-- **Missing types:** `ParseColorError`, `Err`
+- **Priority Score:** 31007.8
+- **Functions:** 5/7 matched (target 13)
+- **Missing functions:** `get_dyncolors_fg`, `get_dyncolors_bg`
+- **Types:** 2/3 matched (target 5)
+- **Missing types:** `Err`
 
 ### 3. overrides
 
