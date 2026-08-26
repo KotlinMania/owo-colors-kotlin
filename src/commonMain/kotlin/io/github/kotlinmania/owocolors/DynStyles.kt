@@ -25,6 +25,7 @@ public class Styled<T> internal constructor(
     /** The style to apply to target. */
     public val style: Style,
 ) {
+    public fun inner(): T = target
     override fun toString(): String =
         buildString {
             style.fmtPrefix(this)
@@ -273,16 +274,23 @@ public data class Style(
      */
     public fun color(color: AnsiColors): Style = copy(fg = DynColors.Ansi(color))
 
-    /**
-     * Set the background color at runtime. Only use if you do not know what
-     * color to use at compile-time. If the color is constant, use a
-     * color-specific method such as [onBrightYellow].
-     *
-     * ```kotlin
-     * println(Style().onColor(AnsiColors.BrightYellow).style("yellow background"))
-     * ```
-     */
+    public fun color(color: DynColors): Style = copy(fg = color)
+
     public fun onColor(color: AnsiColors): Style = copy(bg = DynColors.Ansi(color))
+
+    public fun onColor(color: DynColors): Style = copy(bg = color)
+
+    public fun fg(color: DynColors): Style = color(color)
+
+    public fun bg(color: DynColors): Style = onColor(color)
+
+    public fun fgRgb(r: Int, g: Int, b: Int): Style = color(DynColors.Rgb(r, g, b))
+
+    public fun bgRgb(r: Int, g: Int, b: Int): Style = onColor(DynColors.Rgb(r, g, b))
+
+    public fun truecolor(r: Int, g: Int, b: Int): Style = fgRgb(r, g, b)
+
+    public fun onTruecolor(r: Int, g: Int, b: Int): Style = bgRgb(r, g, b)
 
     /** Checks if the style is plain (i.e. no colors or effects set). */
     public fun isPlain(): Boolean = fg == null && bg == null && !bold && styleFlags.isPlain()
@@ -391,15 +399,11 @@ public data class Style(
 }
 
 private fun DynColors.writeRawAnsiFg(out: StringBuilder) {
-    when (this) {
-        is DynColors.Ansi -> out.append(color.fg)
-    }
+    out.append(fmtRawAnsiFg())
 }
 
 private fun DynColors.writeRawAnsiBg(out: StringBuilder) {
-    when (this) {
-        is DynColors.Ansi -> out.append(color.bg)
-    }
+    out.append(fmtRawAnsiBg())
 }
 
 /**
@@ -430,6 +434,9 @@ public data class StyleSuffixFormatter internal constructor(
 
 /** Helper to create [Style]s more ergonomically. */
 public fun style(): Style = Style()
+
+/** Apply a style to any value. */
+public fun <T> T.style(style: Style): Styled<T> = style.style(this)
 
 /**
  * Bit-packed effect flags storing the eight non-bold text effects.
