@@ -1,4 +1,4 @@
-// port-lint: tests owo-colors/src/dyn_styles.rs
+// port-lint: tests dyn_styles.rs
 package io.github.kotlinmania.owocolors
 
 import kotlin.test.Test
