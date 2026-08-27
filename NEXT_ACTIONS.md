@@ -4,10 +4,10 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 4/14 (28.6%)
-- **Function parity:** 48/130 matched (target 130) — 36.9%
-- **Class/type parity:** 9/33 matched (target 15) — 27.3%
-- **Combined symbol parity:** 57/163 matched (target 145) — 35.0%
+- **Files Present:** 4/15 (26.7%)
+- **Function parity:** 48/143 matched (target 130) — 33.6%
+- **Class/type parity:** 9/43 matched (target 15) — 20.9%
+- **Combined symbol parity:** 57/186 matched (target 145) — 30.6%
 - **Average inline-code cosine:** 0.64 (function body across 4 matched files)
 - **Average documentation cosine:** 0.66 (doc text across 4 matched files)
 - **Cheat-zeroed Files:** 0
@@ -27,7 +27,7 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. dyn_styles
+### 1. owo-colors.dyn_styles
 
 - **Target:** `owocolors.DynStyles`
 - **Similarity:** 0.57
@@ -39,7 +39,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 8/9 matched
 
-### 2. dyn_colors
+### 2. owo-colors.dyn_colors
 
 - **Target:** `owocolors.DynColors`
 - **Similarity:** 0.22
@@ -50,7 +50,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/3 matched (target 5)
 - **Missing types:** `Err`
 
-### 3. overrides
+### 3. owo-colors.overrides
 
 - **Target:** `owocolors.Overrides`
 - **Similarity:** 0.76
@@ -62,7 +62,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `ResetOverrideGuard`
 - **Tests:** 1/1 matched
 
-### 4. colors
+### 4. owo-colors.colors
 
 - **Target:** `owocolors.Colors`
 - **Similarity:** 1.00
@@ -81,17 +81,4 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
-
-## Reexport / Wiring Modules
-
-These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
-normal priority and missing-file ladders because they are wiring
-modules, not direct logic ports. Consult them for call-site routing;
-do not treat them as the next implementation target by default.
-
-### Missing
-
-| Source | Expected target | Deps | Source path | Expected path |
-|--------|-----------------|------|-------------|---------------|
-| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
 
