@@ -4,15 +4,20 @@ package io.github.kotlinmania.owocolors
 /**
  * An error for when the color cannot be parsed from a string at runtime.
  */
-class ParseColorError(message: String = "Color cannot be parsed from string") : Exception(message)
+class ParseColorError(
+    message: String = "Color cannot be parsed from string",
+) : Exception(message)
 
 /**
  * Available colors for the purpose of setting one at runtime.
  */
 public sealed interface DynColors {
     fun fmtAnsiFg(): String
+
     fun fmtAnsiBg(): String
+
     fun fmtRawAnsiFg(): String
+
     fun fmtRawAnsiBg(): String
 
     /**
@@ -22,8 +27,11 @@ public sealed interface DynColors {
         public val color: AnsiColors,
     ) : DynColors {
         override fun fmtAnsiFg(): String = "\u001b[${color.fg}m"
+
         override fun fmtAnsiBg(): String = "\u001b[${color.bg}m"
+
         override fun fmtRawAnsiFg(): String = "${color.fg}"
+
         override fun fmtRawAnsiBg(): String = "${color.bg}"
     }
 
@@ -36,8 +44,11 @@ public sealed interface DynColors {
         public val b: Int,
     ) : DynColors {
         override fun fmtAnsiFg(): String = "\u001b[38;2;$r;$g;${b}m"
+
         override fun fmtAnsiBg(): String = "\u001b[48;2;$r;$g;${b}m"
+
         override fun fmtRawAnsiFg(): String = "38;2;$r;$g;$b"
+
         override fun fmtRawAnsiBg(): String = "48;2;$r;$g;$b"
     }
 
@@ -48,8 +59,11 @@ public sealed interface DynColors {
         public val code: Int,
     ) : DynColors {
         override fun fmtAnsiFg(): String = "\u001b[38;5;${code}m"
+
         override fun fmtAnsiBg(): String = "\u001b[48;5;${code}m"
+
         override fun fmtRawAnsiFg(): String = "38;5;$code"
+
         override fun fmtRawAnsiBg(): String = "48;5;$code"
     }
 
@@ -64,25 +78,26 @@ public sealed interface DynColors {
                 }
                 throw ParseColorError()
             }
-            val ansi = when (s.lowercase()) {
-                "black" -> AnsiColors.Black
-                "red" -> AnsiColors.Red
-                "green" -> AnsiColors.Green
-                "yellow" -> AnsiColors.Yellow
-                "blue" -> AnsiColors.Blue
-                "magenta", "purple" -> AnsiColors.Magenta
-                "cyan" -> AnsiColors.Cyan
-                "white" -> AnsiColors.White
-                "bright black" -> AnsiColors.BrightBlack
-                "bright red" -> AnsiColors.BrightRed
-                "bright green" -> AnsiColors.BrightGreen
-                "bright yellow" -> AnsiColors.BrightYellow
-                "bright blue" -> AnsiColors.BrightBlue
-                "bright magenta" -> AnsiColors.BrightMagenta
-                "bright cyan" -> AnsiColors.BrightCyan
-                "bright white" -> AnsiColors.BrightWhite
-                else -> throw ParseColorError("Unknown color name $s")
-            }
+            val ansi =
+                when (s.lowercase()) {
+                    "black" -> AnsiColors.Black
+                    "red" -> AnsiColors.Red
+                    "green" -> AnsiColors.Green
+                    "yellow" -> AnsiColors.Yellow
+                    "blue" -> AnsiColors.Blue
+                    "magenta", "purple" -> AnsiColors.Magenta
+                    "cyan" -> AnsiColors.Cyan
+                    "white" -> AnsiColors.White
+                    "bright black" -> AnsiColors.BrightBlack
+                    "bright red" -> AnsiColors.BrightRed
+                    "bright green" -> AnsiColors.BrightGreen
+                    "bright yellow" -> AnsiColors.BrightYellow
+                    "bright blue" -> AnsiColors.BrightBlue
+                    "bright magenta" -> AnsiColors.BrightMagenta
+                    "bright cyan" -> AnsiColors.BrightCyan
+                    "bright white" -> AnsiColors.BrightWhite
+                    else -> throw ParseColorError("Unknown color name $s")
+                }
             return Ansi(ansi)
         }
     }

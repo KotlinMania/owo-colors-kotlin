@@ -26,6 +26,7 @@ public class Styled<T> internal constructor(
     public val style: Style,
 ) {
     public fun inner(): T = target
+
     override fun toString(): String =
         buildString {
             style.fmtPrefix(this)
