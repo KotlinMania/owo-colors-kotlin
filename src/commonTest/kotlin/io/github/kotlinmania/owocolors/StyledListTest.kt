@@ -1,4 +1,4 @@
-// port-lint: tests styled_list.rs
+// port-lint: tests owo-colors/src/styled_list.rs
 package io.github.kotlinmania.owocolors
 
 // Upstream styled_list.rs tests exercise StyledList and the Transition enum

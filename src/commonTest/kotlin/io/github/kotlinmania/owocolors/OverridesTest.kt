@@ -1,4 +1,4 @@
-// port-lint: tests overrides.rs
+// port-lint: tests owo-colors/src/overrides.rs
 package io.github.kotlinmania.owocolors
 
 import kotlin.test.Test
