@@ -5,9 +5,9 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 4/15 (26.7%)
-- **Function parity:** 48/143 matched (target 130) — 33.6%
-- **Class/type parity:** 9/43 matched (target 15) — 20.9%
-- **Combined symbol parity:** 57/186 matched (target 145) — 30.6%
+- **Function parity:** 48/133 matched (target 130) — 36.1%
+- **Class/type parity:** 9/35 matched (target 15) — 25.7%
+- **Combined symbol parity:** 57/168 matched (target 145) — 33.9%
 - **Average inline-code cosine:** 0.64 (function body across 4 matched files)
 - **Average documentation cosine:** 0.66 (doc text across 4 matched files)
 - **Cheat-zeroed Files:** 0
@@ -81,4 +81,17 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
+
+## Reexport / Wiring Modules
+
+These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
+normal priority and missing-file ladders because they are wiring
+modules, not direct logic ports. Consult them for call-site routing;
+do not treat them as the next implementation target by default.
+
+### Missing
+
+| Source | Expected target | Deps | Source path | Expected path |
+|--------|-----------------|------|-------------|---------------|
+| `owo-colors.lib` | `owocolors.src.Lib` | 0 | `owo-colors/src/lib.rs` | `owocolors/src/Lib.kt` |
 
