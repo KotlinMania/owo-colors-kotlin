@@ -1,4 +1,4 @@
-// port-lint: source owo-colors/src/overrides.rs
+// port-lint: source overrides.rs
 @file:OptIn(kotlin.concurrent.atomics.ExperimentalAtomicApi::class)
 
 package io.github.kotlinmania.owocolors
