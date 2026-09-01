@@ -2,7 +2,7 @@
   "type": "port",
   "name": "owo-colors-kotlin",
   "source": {
-    "path": "tmp",
+    "path": "tmp/owo-colors/src",
     "lang": "rust"
   },
   "target": {
