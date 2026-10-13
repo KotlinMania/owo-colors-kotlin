@@ -53,9 +53,9 @@ struct OwoColorsExportTests {
         #expect(viaOnColor == "\u{001B}[103m")
     }
 
-    @Test("Effects vararg from Swift")
-    func testEffectsVarargFromSwift() throws {
-        let prefix = style().effects(effects: .Strikethrough, .Underline)
+    @Test("Effects from Swift")
+    func testEffectsFromSwift() throws {
+        let prefix = style().effect(effect: .Strikethrough).effect(effect: .Underline)
             .prefixFormatter()
             .toString()
         #expect(prefix == "\u{001B}[4;9m")
