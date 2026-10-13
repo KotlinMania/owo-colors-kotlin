@@ -11,14 +11,18 @@ class ParseColorError(
 /**
  * Available colors for the purpose of setting one at runtime.
  */
-public sealed interface DynColors {
-    fun fmtAnsiFg(): String
+public sealed interface DynColors : DynColor {
+    override fun fmtAnsiFg(): String
 
-    fun fmtAnsiBg(): String
+    override fun fmtAnsiBg(): String
 
-    fun fmtRawAnsiFg(): String
+    override fun fmtRawAnsiFg(): String
 
-    fun fmtRawAnsiBg(): String
+    override fun fmtRawAnsiBg(): String
+
+    override fun getDyncolorsFg(): DynColors = this
+
+    override fun getDyncolorsBg(): DynColors = this
 
     /**
      * One of the [AnsiColors] standard ANSI colors.
